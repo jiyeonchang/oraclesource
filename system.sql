@@ -1,0 +1,1 @@
+alter user hr IDENTIFIED by hr;
