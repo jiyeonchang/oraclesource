@@ -2140,6 +2140,147 @@ WHERE SAL BETWEEN LOSAL AND HISAL AND GRADE =5);
    
    
    
+   --트랜잭션
+   -- 하나의 단위로 데이터 처리 
+   
+   CREATE TABLE detp_tcl as select * from dept;
+   
+   SELECT *FROM  DEPT_TCL; 
+   
+   --트랜잭션과 관련있는 명령어 실행 
+   INSERT INTO DEPT_TCL VALUES (50,'DATABASE','SEOUL');
+   
+   UPDATE DEPT_TCL SET LOC = 'BUSAN' WHERE DEPTNO =40;
+   
+   DELETE FROM DEPT_TCL WHERE DNAME = 'RESEARCH';
+   
+   -----------
+   
+   --수행된 명령 취소 
+   
+   ROLLBACK;
+   
+   --수행된 명령 최종 반영 
+   
+   COMMIT;
+   
+   
+   SELECT *FROM DEPT_TCL;
+   
+   --세션 : 어떤활동을 위한 시간이나 기간 
+   --       데이터베이스 접속을 시작으로 여러 데이터베이스에서 관련 작없을 수행한후
+   --       접속을 종료하기까지 전체기간 
+   
+delete from dept_tcl where deptno =50;
+
+   select* from dept_tcl;
+   commit;
+   
+   update dept_tcl 
+   set loc = 'seoul'
+   where deptno = 30;
+   commit;
+   
+   
+   
+   
+   
+   
+   
+   
+   -----10/01
+   --DDL (데이터 정의어)
+   --객체를 생성,변경,삭제 
+   --실행하면 반영됨
+   
+   --create (생성), alter(변경),drop(삭제)
+   
+   --create table 테이블이름(필드명 1 자료형, 필드명 2 자료형 ,.....)
+   --테이블 이름 규칙 
+   -- 문자로 시작
+   --같은 사용자 안에서 동일한 테이블 명 사용불가
+   --sql키워드는 테이블 이름으로 사용할 수 없음 
+   
+   --필드명 생성큐칙
+   --문자로시작
+   --열이름은 중복되면 안됨
+   --sql키워드 사용불가
+   
+   --자료형 : 숫자 NUMBER , 가변문자(들어온문자수만큼 잡아줌) varchar2 /고정문자는 4개로 고정하면 문자는 딱 4개가 들어와야함(CHAR) ,날짜 date
+   
+   
+   create table EMP_DDL(
+   EMPNO NUMBER(4), --숫자로 4자리 까지만 허용하겠음  
+   ENAME VARCHAR2(10),
+   JOB VARCHAR2 (9),
+   MGR NUMBER(4),
+   HIREDATE DATE,
+   SAL NUMBER(7,2), --숫자로 7자리까지 허용(소수점두자리까지허용)
+   COMM NUMBER(7,2),
+   DEPTNO NUMBER(2)
+  
+   );
+   DESC EMP_DDL;
+   
+   DROP TABLE EMP_DDL;
+   
+   --구조+ 데이터 이용하여 생성
+   CREATE TABLE DEPT_DDL AS SELECT *FROM DEPT;
+   CREATE TABLE DEPT_DDL_30 AS SELECT *FROM DEPT WHERE DEPTNO=30;
+   
+   --다른테이블의 구조만 복사하여 새 테이블 생성
+   CREATE TABLE DEPT_DDL2 AS SELECT *FROM DEPT WHERE 1<>1;
+   SELECT*FROM DEPT_DDL2;
+   
+   --ALTER(테이블 변경)
+   --이미 생성된 객체를 변경 
+   
+   CREATE TABLE EMP_ALTER AS SELECT *FROM EMP;
+   --새로운 컬럼 (열)추가 :ADD
+   DESC EMP_ALTER;
+   
+   ALTER TABLE EMP_ALTER ADD HP VARCHAR2(20);
+   SELECT *FROM EMP_ALTER;
+   
+    --RENAME : 열 이름을 변경 
+    ALTER TABLE EMP_ALTER RENAME COLUMN HP TO TEL;
+   
+   --MODIFY : 열의 자료형을 변경 
+    ALTER TABLE EMP_ALTER MODIFY EMPNO NUMBER(5);
+    
+    --DROP : 열 삭제 
+    ALTER TABLE EMP_ALTER DROP COLUMN TEL;
+    
+    -- 테이블 이름 변경 
+    RENAME EMP_ALTER TO EMP_RENAME;
+    
+    DESC EMP_RENAME;
+    
+    --테이블 데이터를 삭제 TRUNCATE
+    
+    SELECT *FROM EMP_RENAME;
+    TRUNCATE TABLE EMP_RENAME;
+       
+    
+    
+     --MEMBER테이블 작성
+     
+     CREATE TABLE MEMBER(
+     ID CHAR(8),
+     NAME VARCHAR2 (10),
+     ADDR VARCHAR2(50),
+     NATION CHAR(8),
+     EMAIL VARCHAR2(50),
+     AGE NUMBER(7,2)
+     );
+     
+     ALTER TABLE MEMBER ADD BIGO VARCHAR2(20);
+     ALTER TABLE MEMBER MODIFY BIGO VARCHAR2(30);
+     ALTER TABLE MEMBER RENAME COLUMN BIGO TO REMARK;
+     ALTER TABLE MEMBER MODIFY NATION CHAR(4);
+   
+     DESC MEMBER;
+    
    
    
    
