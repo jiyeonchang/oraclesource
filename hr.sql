@@ -233,3 +233,42 @@ where e.department_id = d.department_id and d.department_name = 'Executive';
  
  
  
+ ---------1005
+ 
+ CREATE TABLE INDEXTBL AS SELECT DISTINCT FIRST_NAME ,LAST_NAME ,HIRE_DATE FROM EMPLOYEES;
+ 
+ SELECT *FROM INDEXTBL;
+ 
+ --인덱스 생성 전 검색 방식 : full
+ SELECT *FROM INDEXTBL where FIRST_NAME = 'Jack';
+ 
+ --인덱스 생성
+ create index idx_indextbl_firstname on indextbl(first_name);
+ 
+ --인덱스 생성 후 검색 방식: index 검색(range scan)
+  SELECT *FROM INDEXTBL where FIRST_NAME = 'Jack';
+  
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
